@@ -1,33 +1,29 @@
 # Товары разные положить в корзину.
 # Хэш вида  big_hash = {"колбаса"=> {price: 120, qty: 30}, "хлеб"=> {price: 80, qty: 2 }}
 
-big_hash = {}
-small_hash = {}
+all_products = {}
+one_product = {}
 sum = 0
-while 1==1 do
+loop do
 
-print "Введите наименование товара: "
-input_g = gets.chomp
-if input_g == "стоп" then
-  break
-end
+  print "Введите наименование товара: "
+  title = gets.chomp
+  break if title == "стоп"
 
-print "Введите цену за единицу товара: "
-input_price = gets.chomp.to_f
-small_hash["price"] = input_price
+  print "Введите цену за единицу товара: "
+  price = gets.chomp.to_f
+  one_product["price"] = price
 
-print "Введите количество товара: "
-input_qty = gets.chomp.to_f
-small_hash["qty"] = input_qty
-small_hash["sum"] = input_qty * input_price
-sum += small_hash["sum"]
+  print "Введите количество товара: "
+  qty = gets.chomp.to_f
+  one_product["qty"] = qty
+  one_product["sum"] = qty * price
+  sum += one_product["sum"]
 
-big_hash[input_g] = small_hash
+  all_products[title] = one_product
 
-puts small_hash
+  puts one_product
 
 end
-puts big_hash
+puts all_products
 puts "Вы собрали корзинку на #{sum}"
-
-
