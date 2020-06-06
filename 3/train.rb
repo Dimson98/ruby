@@ -1,9 +1,12 @@
+#
+
 class Train
   attr_accessor :current_speed  #,  :route   # родит переменную @route, методы get & set, но нет значения пока. Можно оставить set_route_
   attr_reader :qty # теперь не нужно описывать get-метод train.qty
   attr_reader :type
   attr_reader :current_position
-  attr_reader :route
+  # attr_reader :route  - это не атрибут трамвая
+
 
   def initialize(train_id, train_type, wagons)
     @id = train_id
@@ -40,7 +43,21 @@ class Train
     @current_station = @route.stations.first
     @current_station.park_train(self)
   end
-# find next в пристёгнутом route
+
+# find next/previous в пристёгнутом объекте route
+
+  def get_current_point
+    @current_station = @route[@current_index]
+  end
+
+  def get_next_point
+  @current_station = @route[@current_index + 1]
+  end
+
+  def get_previous_point
+  @current_station = @route[@current_index - 1]
+  end
+
   def move_to_next_station
     @current_position = @route[@current_index+1]
     @current_station.let_out_train(self)
@@ -53,17 +70,7 @@ class Train
     @current_station.park_train(self)
   end
 
-  def get_current_station
-    @current_station = @route[@current_index]
-  end
 
-  def get_next_station
-    @current_station = @route[@current_index + 1]
-  end
-
-  def get_previous_station
-    @current_station = @route[@current_index - 1]
-  end
 
   # def current_position
   #   @current_position
